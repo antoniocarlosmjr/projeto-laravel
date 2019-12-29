@@ -25,7 +25,6 @@ class ClienteControlador extends Controller
         }
     }
 
-
     /**
      * Display a listing of the resource.
      *
@@ -59,7 +58,7 @@ class ClienteControlador extends Controller
     public function store(Request $request)
     {
         $clientes = session('clientes');
-        $dados['id'] = count($clientes) + 1;
+        $dados['id'] = end($clientes)['id'] + 1;
         $dados['nome'] = $request->nome;
         $clientes[] = $dados;
         session(['clientes' => $clientes]);
@@ -76,7 +75,8 @@ class ClienteControlador extends Controller
     public function show($id)
     {
         $clientes = session('clientes');
-        $cliente = $clientes[$id - 1];
+        $index = $this->getIndex($id, $clientes);
+        $cliente = $clientes[$index];
 
         return view('clientes.info', compact(['cliente']));
     }
@@ -90,7 +90,8 @@ class ClienteControlador extends Controller
     public function edit($id)
     {
         $clientes = session('clientes');
-        $cliente = $clientes[$id - 1];
+        $index = $this->getIndex($id, $clientes);
+        $cliente = $clientes[$index];
         return view('clientes.edit', compact(['cliente']));
     }
 
@@ -104,7 +105,8 @@ class ClienteControlador extends Controller
     public function update(Request $request, $id)
     {
         $clientes = session('clientes');
-        $clientes[$id - 1]['nome'] = $request->nome;
+        $index = $this->getIndex($id, $clientes);
+        $clientes[$index]['nome'] = $request->nome;
         session(['clientes' => $clientes]);
         return redirect()->route('clientes.index');
     }
@@ -117,6 +119,25 @@ class ClienteControlador extends Controller
      */
     public function destroy($id)
     {
-        //
+        $clientes = session('clientes');
+        $index = $this->getIndex($id, $clientes);
+        array_splice($clientes, $index, 1);
+        session(['clientes' => $clientes]);
+        return redirect()->route('clientes.index');
+    }
+
+    /**
+     * Return index of customer.
+     *
+     * @param  int  $id
+     * @param  array  $clientes
+     * @return \Illuminate\Http\Response
+     */
+    private function getIndex($id, $clientes)
+    {
+        $ids = array_column($clientes, 'id');
+        $index = array_search($id, $ids);
+
+        return $index;
     }
 }
