@@ -1,3 +1,6 @@
+@extends('layouts.principal')
+@section('conteudo')
+
 <h3>{{$titulo}}:</h3>
 <a href="{{route('clientes.create')}}">NOVO CLIENTE</a>
 
@@ -19,3 +22,5 @@
 @else 
     <h4>Não existem usuários cadastrados.</h4>
 @endif
+
+@endsection
