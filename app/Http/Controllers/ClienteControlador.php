@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class ClienteControlador extends Controller
 {
-
+    
     private $clientes = [
         ['id' => 1,  'nome' => "João da Silva"],
         ['id' => 2,  'nome' => "Antonio Martins"],
@@ -33,10 +33,10 @@ class ClienteControlador extends Controller
     public function index()
     {
         $clientes = session('clientes');
+        $titulo = "Todos os clientes";
         return view(
-            'clientes.index', 
-            compact(['clientes'])
-        );
+            'clientes.index',
+            ['clientes' => $clientes, 'titulo' => $titulo]);
     }
 
     /**
@@ -140,4 +140,5 @@ class ClienteControlador extends Controller
 
         return $index;
     }
+    
 }
