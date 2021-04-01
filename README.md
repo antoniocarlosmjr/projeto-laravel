@@ -7,7 +7,7 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
-## Primeiro projeto em Laravel - Desenvolvimento web com Laravel - por Antonio Martins
+## Projeto em Laravel - Desenvolvimento web com Laravel
 
 Laravel é um framework web com sintaxe expressiva e elegante. Acredita-se que o desenvolvimento deve ser uma experiência agradável e criativa para ser verdadeiramente gratificante. Neste repositório ficará o app esqueleto simples de um primeiro projeto desenvolvido com o uso do Laravel com criação de cruds de Clientes, Produtos e Departamentos. 
 
